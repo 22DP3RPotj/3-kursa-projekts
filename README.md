@@ -2,4 +2,4 @@
 
 ### 3 Kursa Projekts
 
-Mērķis: Izveidot pamata HTML tīmekļa vietnes struktūru ar galveno sadaļu, galveni, kājeni, navigācijas izvēlni un dažiem vienkāršiem elementiem.
+Mērķis: Izveidot pamata HTML tīmekļa vietnes struktūru.
