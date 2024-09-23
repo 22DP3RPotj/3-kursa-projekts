@@ -14,6 +14,7 @@ header {
 
 aside {
     background-color: #f4f4f4;
+    width: 100%;
     padding: 1em;
 }
 
@@ -27,9 +28,17 @@ footer {
 }
 
 nav a {
-    margin: 15px;
+    padding: 10px;
     color: white;
     text-decoration: none;
+    transition: 0.25s;
+}
+
+nav a:hover {
+    background: linear-gradient(
+        rgba(0, 0, 0, 0.25), 
+        rgba(0, 0, 0, 0.25));
+      transition:0.25s;
 }
 
 main {
