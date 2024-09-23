@@ -5,12 +5,10 @@
 body {
     margin: 10px;
     padding: 0;
-    /* background-image: url('gradient-background.avif');
-    background-repeat: no-repeat; */
 }
 
 header {
-    background-color: lightblue;
+    background-color: blue;
     padding: 10px;
 }
 
@@ -30,7 +28,7 @@ footer {
 
 nav a {
     margin: 15px;
-    color: blue;
+    color: white;
     text-decoration: none;
 }
 
