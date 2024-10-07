@@ -168,6 +168,7 @@ body {
 
 .dark-mode-toggle i {
     margin-right: 0.5rem;
+    color: #222;
 }
 
 body.dark-mode {
@@ -192,8 +193,6 @@ body.dark-mode .modal-content {
     background-color: #555;
 }
 
-/* Responsive */
-/* Adjusting the hamburger menu width */
 @media (max-width: 768px) {
     .nav-links {
         display: none;
@@ -202,19 +201,20 @@ body.dark-mode .modal-content {
         top: 100%;
         left: 0;
         background-color: #333;
-        width: 250px; /* Changed from 100% to 250px width */
+        width: 150px;
+        height: auto;
         text-align: center;
+        z-index: 10;
     }
-
-    /* Dropdown inside the hamburger menu */
+    
     .dropdown-menu {
         display: none;
-        position: static; /* Ensure the dropdown is static in the hamburger menu */
-        background-color: #444; /* Background for mobile dropdown */
+        position: static;
+        background-color: #444;
     }
 
     .nav-links.show .dropdown-menu {
-        display: block; /* Show dropdown on click in hamburger menu */
+        display: block;
     }
 
     .nav-links.show {
@@ -226,12 +226,11 @@ body.dark-mode .modal-content {
     }
 }
 
-/* Adjust dark mode toggle text */
 .dark-mode-toggle span {
     margin-left: 0.5rem;
+    color: #222;
 }
 
-/* Dropdown in desktop mode */
 @media (min-width: 768px) {
     .dropdown:hover .dropdown-menu {
         display: block;
