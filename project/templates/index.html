@@ -28,30 +28,60 @@
     
     <section class="cards-container">
         <div class="card">
-            <img src="../static/images/html_logo.png" alt="Card Image">
+            <img src="../static/images/html_logo.png" alt="HTML Logo">
             <h3>HTML</h3>
             <p>Hypertext Markup Language is the standard markup language for documents.</p>
-            <button class="learn-more">Learn More</button>
+            <button class="learn-more" data-modal="htmlModal">Learn More</button>
         </div>
+
         <div class="card">
-            <img src="../static/images/css-3.svg" alt="Card Image">
+            <img src="../static/images/css-3.svg" alt="CSS Logo">
             <h3>CSS</h3>
             <p>Cascading Style Sheets is a style sheet language used for specifying the presentation and styling of a document.</p>
-            <button class="learn-more">Learn More</button>
+            <button class="learn-more" data-modal="cssModal">Learn More</button>
         </div>
+
         <div class="card">
-            <img src="../static/images/js_logo.png" alt="Card Image">
+            <img src="../static/images/js_logo.png" alt="JavaScript Logo">
             <h3>JavaScript</h3>
             <p>JavaScript, often abbreviated as JS, is a programming language and core technology of the Web.</p>
-            <button class="learn-more">Learn More</button>
+            <button class="learn-more" data-modal="jsModal">Learn More</button>
         </div>
     </section>
 
-    <div class="modal" id="modal">
+    <div class="modal" id="htmlModal">
         <div class="modal-content">
-            <span class="close-btn">&times;</span>
-            <h2>More Information</h2>
-            <p>Modal content. Will be updated later.</p>
+            <span class="close-btn" data-close="htmlModal">&times;</span>
+            <h2>Learn HTML</h2>
+            <p>HTML (HyperText Markup Language) is the standard language for creating web pages.</p>
+            <ul>
+                <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML">MDN Web Docs: HTML</a></li>
+                <li><a href="https://www.w3schools.com/html/">W3Schools: HTML Tutorial</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="modal" id="cssModal">
+        <div class="modal-content">
+            <span class="close-btn" data-close="cssModal">&times;</span>
+            <h2>Learn CSS</h2>
+            <p>CSS (Cascading Style Sheets) is used to style HTML elements on web pages.</p>
+            <ul>
+                <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS">MDN Web Docs: CSS</a></li>
+                <li><a href="https://www.w3schools.com/css/">W3Schools: CSS Tutorial</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="modal" id="jsModal">
+        <div class="modal-content">
+            <span class="close-btn" data-close="jsModal">&times;</span>
+            <h2>Learn JavaScript</h2>
+            <p>JavaScript is a programming language used to create interactive effects on web pages.</p>
+            <ul>
+                <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">MDN Web Docs: JavaScript</a></li>
+                <li><a href="https://www.w3schools.com/js/">W3Schools: JavaScript Tutorial</a></li>
+            </ul>
         </div>
     </div>
 
