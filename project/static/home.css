@@ -193,6 +193,7 @@ body.dark-mode .modal-content {
 }
 
 /* Responsive */
+/* Adjusting the hamburger menu width */
 @media (max-width: 768px) {
     .nav-links {
         display: none;
@@ -201,8 +202,19 @@ body.dark-mode .modal-content {
         top: 100%;
         left: 0;
         background-color: #333;
-        width: 100%;
+        width: 250px; /* Changed from 100% to 250px width */
         text-align: center;
+    }
+
+    /* Dropdown inside the hamburger menu */
+    .dropdown-menu {
+        display: none;
+        position: static; /* Ensure the dropdown is static in the hamburger menu */
+        background-color: #444; /* Background for mobile dropdown */
+    }
+
+    .nav-links.show .dropdown-menu {
+        display: block; /* Show dropdown on click in hamburger menu */
     }
 
     .nav-links.show {
@@ -212,9 +224,16 @@ body.dark-mode .modal-content {
     .hamburger {
         display: block;
     }
+}
 
-    .cards-container {
-        flex-direction: column;
-        align-items: center;
+/* Adjust dark mode toggle text */
+.dark-mode-toggle span {
+    margin-left: 0.5rem;
+}
+
+/* Dropdown in desktop mode */
+@media (min-width: 768px) {
+    .dropdown:hover .dropdown-menu {
+        display: block;
     }
 }
