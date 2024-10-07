@@ -199,11 +199,12 @@ body.dark-mode .modal-content {
         flex-direction: column;
         position: absolute;
         top: 100%;
-        left: 0;
+        right: 0;
         background-color: #333;
-        width: 150px;
+        width: auto;
         height: auto;
         text-align: center;
+        padding: 10px;
         z-index: 10;
     }
     
