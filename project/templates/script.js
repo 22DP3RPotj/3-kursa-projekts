@@ -43,17 +43,14 @@ window.addEventListener('click', (e) => {
 
 // Dark mode
 const darkModeToggle = document.querySelector('.dark-mode-toggle');
-const darkModeIcon = darkModeToggle.querySelector('i');
 const darkModeText = darkModeToggle.querySelector('span');
 const body = document.body;
 
 darkModeToggle.addEventListener('click', () => {
     body.classList.toggle('dark-mode');
     if (body.classList.contains('dark-mode')) {
-        darkModeIcon.classList.replace('fa-moon', 'fa-sun');
         darkModeText.textContent = 'Light Mode';
     } else {
-        darkModeIcon.classList.replace('fa-sun', 'fa-moon');
         darkModeText.textContent = 'Dark Mode';
     }
 });
