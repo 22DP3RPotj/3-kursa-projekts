@@ -1,2 +1,5 @@
-**/server*
-**/Makefile
+Makefile
+
+server/
+server*
+!server_app.exe
