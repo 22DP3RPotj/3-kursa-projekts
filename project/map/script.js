@@ -25,35 +25,7 @@ var LKS92WGS84 = (function() {
         return yd + (beta * Math.sin(2 * yd)) + (gamma * Math.sin(4 * yd)) + (delta * Math.sin(6 * yd)) + (epsilon * Math.sin(8 * yd));
     };
 
-    // Convert latitude and longitude to map coordinates
-    LKS92WGS84.convertLatLonToXY = function(coordinates) {
-        var lat = coordinates[0] * LKS92WGS84.PI / 180;
-        var lng = coordinates[1] * LKS92WGS84.PI / 180;
-        var xy = LKS92WGS84.convertMapLatLngToXY(lat, lng, LKS92WGS84.CENTRAL_MERIDIAN);
-
-        xy[0] = xy[0] * LKS92WGS84.SCALE + LKS92WGS84.OFFSET_X;
-        xy[1] = xy[1] * LKS92WGS84.SCALE + LKS92WGS84.OFFSET_Y;
-
-        if (xy[1] < 0) {
-            xy[1] += 10000000; // Adjust for negative Y values
-        }
-
-        return xy;
-    };
-
     // Convert map coordinates to latitude and longitude
-    LKS92WGS84.convertXYToLatLon = function(coordinates) {
-        var x = (coordinates[0] - LKS92WGS84.OFFSET_X) / LKS92WGS84.SCALE;
-        var y = (coordinates[1] - LKS92WGS84.OFFSET_Y) / LKS92WGS84.SCALE;
-        var latLng = LKS92WGS84.convertMapXYToLatLon(x, y, LKS92WGS84.CENTRAL_MERIDIAN);
-
-        latLng[0] = latLng[0] / LKS92WGS84.PI * 180;
-        latLng[1] = latLng[1] / LKS92WGS84.PI * 180;
-
-        return latLng; // Return WGS84 latitude and longitude
-    };
-
-    // Function for converting map XY to Latitude and Longitude
     LKS92WGS84.convertMapXYToLatLon = function(x, y, lambda0) {
         var phif, Nf, Nfpow, nuf2, ep2, tf, tf2, tf4, cf,
             x1frac, x2frac, x3frac, x4frac, x5frac, x6frac, x7frac, x8frac,
@@ -118,14 +90,15 @@ var LKS92WGS84 = (function() {
 const map = L.map('map').setView([56.8796, 24.6032], 7); // Latvia coordinates
 
 // Add OpenStreetMap layer
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
     maxZoom: 19,
-    attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
+    attribution: '&copy; <a href="https://carto.com/">Carto</a>'
 }).addTo(map);
+
 
 // Function to convert EPSG:3059 (LKS92) to WGS84 (latitude, longitude)
 function convertCoordinates(x, y) {
-    const latLon = LKS92WGS84.convertXYToLatLon([x, y]);
+    const latLon = LKS92WGS84.convertMapXYToLatLon(x, y, LKS92WGS84.CENTRAL_MERIDIAN);
     return [latLon[0], latLon[1]]; // Return the WGS84 latitude and longitude
 }
 
@@ -136,13 +109,10 @@ fetch('geomap.json')
         console.log('GeoJSON Data:', data); // Log the GeoJSON data to the console
 
         // Transform and add features
+        const markers = []; // Array to store markers
         const features = data.features.map(feature => {
             const [x, y] = feature.geometry.coordinates; // Get EPSG:3059 coordinates
-            console.log(`Original coordinates: ${x}, ${y}`); // Log original coordinates
-
             const [lat, lon] = convertCoordinates(x, y); // Convert to WGS84
-            console.log(`Converted coordinates: ${lat}, ${lon}`); // Log converted coordinates
-
             feature.geometry.coordinates = [lat, lon]; // Update to WGS84
             return feature;
         });
@@ -150,36 +120,18 @@ fetch('geomap.json')
         // Add features to the map
         L.geoJSON(features, {
             pointToLayer: (feature, latlng) => {
-                console.log('Adding marker at:', latlng); // Log where the marker is being placed
-                return L.marker(latlng);
+                const marker = L.marker(latlng);
+                markers.push(marker); // Store marker
+                return marker;
             },
             onEachFeature: (feature, layer) => {
                 const { PLACENAME } = feature.properties; // Extract property
-                layer.bindPopup(`<strong>${PLACENAME}</strong>`); // Add popup with place name
+                layer.bindPopup(`<strong>${PLACENAME}</strong>`); // Add popup
             }
         }).addTo(map);
+
+        // Fit map to markers
+        const group = L.featureGroup(markers);
+        map.fitBounds(group.getBounds());
     })
     .catch(err => console.error("Error loading GeoJSON data:", err));
-
-// For testing purposes, you can also hardcode a test GeoJSON feature to see if the map and markers work
-const testGeoJSON = {
-    "type": "FeatureCollection",
-    "features": [{
-        "type": "Feature",
-        "geometry": {
-            "type": "Point",
-            "coordinates": [24.6032, 56.8796]  // Example coordinates
-        },
-        "properties": {
-            "PLACENAME": "Test Location"
-        }
-    }]
-};
-
-L.geoJSON(testGeoJSON, {
-    pointToLayer: (feature, latlng) => L.marker(latlng),
-    onEachFeature: (feature, layer) => {
-        const { PLACENAME } = feature.properties;
-        layer.bindPopup(`<strong>${PLACENAME}</strong>`);
-    }
-}).addTo(map);
