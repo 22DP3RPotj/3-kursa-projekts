@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kalkulators ar Vēsturi</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="calculator">
@@ -26,14 +26,14 @@
             <button onclick="appendValue('.')">.</button>
             <button onclick="calculate()">=</button>
             <button onclick="appendValue('+')">+</button>
-            <button onclick="clearInput()">AC</button>
+            <button onclick="clearInput()">C</button>
         </div>
     </div>
 
     <div class="history">
-        <h3>Vēsture</h3>
+        <h3>History</h3>
         <div id="history"></div>
-        <button onclick="clearHistory()">Dzēst vēsturi</button>
+        <button onclick="clearHistory()">Clear history</button>
     </div>
 
     <script src="script.js"></script>

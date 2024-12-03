@@ -34,7 +34,7 @@ function displayHistory() {
     historyDiv.innerHTML = '';
     history.forEach((item, index) => {
         const div = document.createElement('div');
-        div.innerHTML = `${item} <button onclick="deleteHistory(${index})">Dzēst</button>`;
+        div.innerHTML = `${item} <button onclick="deleteHistory(${index})">Delete</button>`;
         historyDiv.appendChild(div);
     });
 }
