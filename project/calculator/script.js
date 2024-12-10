@@ -17,11 +17,11 @@ function calculate() {
             input.value = result;
         } else {
             input.value = '';
-            alert('Nepareiza ievade!');
+            alert('Incorrect input!');
         }
     } catch (e) {
         input.value = '';
-        alert('Nepareiza ievade!');
+        alert('Incorrect input!');
     }
 }
 
